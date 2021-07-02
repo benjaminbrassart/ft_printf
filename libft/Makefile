@@ -6,7 +6,7 @@
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/30 22:40:36 by bbrassar          #+#    #+#              #
-#    Updated: 2021/06/30 23:46:09 by bbrassar         ###   ########.fr        #
+#    Updated: 2021/07/02 01:32:53 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,7 +122,7 @@ SRC_LIBFT					= $(addprefix ft_, $(addsuffix .c,	\
 								lstiter							\
 								lstmap							\
 								strrepeat						\
-							))
+							)) get_next_line.c
 
 OBJ_LIBFT					= $(addprefix $(DIR_OBJ_LIBFT)/, $(SRC_LIBFT:.c=.o))
 
