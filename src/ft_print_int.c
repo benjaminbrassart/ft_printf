@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 07:54:48 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/02 10:44:00 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/02 11:53:29 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "options.h"
 #include "print_functions.h"
 
-static int	ft_int_size(int i)
+static int	ft_intsize(int i)
 {
 	int				sz;
 	unsigned int	n;
@@ -54,13 +54,14 @@ int	ft_print_int(t_opt *opt, va_list args)
 	int	digits;
 
 	n = va_arg(args, int);
-	digits = ft_int_size(n) * (!(opt->flags & PRECISION) || opt->precision || n);
+	digits = ft_intsize(n) * (!(opt->flags & PRECISION) || opt->precision || n);
 	if ((opt->flags & PRECISION) && digits < opt->precision)
 		digits = opt->precision;
 	if (opt->flags & PRECISION)
 		opt->flags &= ~ZERO;
 	bytes = digits;
-	while ((opt->flags & MIN_WIDTH) && !(opt->flags & ZERO) && opt->min_width > bytes + !!(n < 0))
+	while ((opt->flags & MIN_WIDTH) && !(opt->flags & ZERO)
+		&& opt->min_width > bytes + !!(n < 0))
 		bytes += write(1, " ", 1);
 	if (n < 0)
 		bytes += write(1, "-", 1);
