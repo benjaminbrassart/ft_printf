@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 20:59:25 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/02 04:07:09 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/02 04:28:03 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ static void	ft_parse_precision(char const **p_format, va_list args, t_opt *opt)
 	{
 		opt->flags |= PRECISION;
 		if (*++(*p_format) == '*')
+		{
 			opt->precision = va_arg(args, int);
+			++(*p_format);
+		}
 		else
 			opt->precision = ft_patoi(p_format);
 	}
