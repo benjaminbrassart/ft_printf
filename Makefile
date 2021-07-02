@@ -6,7 +6,7 @@
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/30 22:15:31 by bbrassar          #+#    #+#              #
-#    Updated: 2021/06/30 23:58:21 by bbrassar         ###   ########.fr        #
+#    Updated: 2021/07/02 00:17:25 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,23 +14,33 @@ CFLAGS					= -Wall -Werror -Wextra -g
 
 BASE_DIR_LIBFT			= libft
 
-# ft_printf
 NAME					= libftprintf.a
 
 DIR_SRC					= src
 
 SRC						= $(addsuffix .c,									\
-																			\
+							ft_printf										\
+							ft_parse_options								\
+							ft_get_printer									\
+							ft_print_char									\
 						)
 
 DIR_OBJ					= obj
 
-OBJ						= $(SRC:.c=.o)
+OBJ						= $(addprefix $(DIR_OBJ)/, $(SRC:.c=.o))
 
 DIR_INCLUDE				= include
-#
+
+INCLUDE					= $(addprefix $(DIR_INCLUDE)/, $(addsuffix .h,		\
+							ft_printf.h										\
+							ft_options.h									\
+							print_functions.h								\
+							libft.h											\
+						))
 
 all:					$(NAME)
+
+-include $(BASE_DIR_LIBFT)/Makefile
 
 $(DIR_OBJ):
 						mkdir -p $@
@@ -49,6 +59,7 @@ fclean:					libft-fclean clean
 
 re:						fclean all
 
-.PHONY:					all clean fclean re
+run_test:				test/main.c all
+						$(CC) -g $< -o $@ -l ftprintf -L .
 
--include $(BASE_DIR_LIBFT)/Makefile
+.PHONY:					all clean fclean re
