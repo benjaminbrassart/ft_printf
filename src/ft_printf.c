@@ -6,12 +6,11 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 00:00:19 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/02 03:21:29 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/02 05:15:33 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "ft_printf.h"
