@@ -6,7 +6,7 @@
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/30 22:15:31 by bbrassar          #+#    #+#              #
-#    Updated: 2021/07/02 07:26:46 by bbrassar         ###   ########.fr        #
+#    Updated: 2021/07/02 07:38:37 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC						= $(addsuffix .c,									\
 							ft_get_printer									\
 							ft_print_char									\
 							ft_print_string									\
+							ft_print_pointer								\
 							ft_print_uint									\
 							ft_print_hex									\
 						)
