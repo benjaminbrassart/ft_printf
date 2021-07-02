@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 20:59:25 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/02 07:13:43 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/02 10:45:20 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_opt	*ft_parse_options(char const **p_format, va_list args)
 			opt->flags &= ~(MIN_WIDTH | ZERO);
 		if (opt->min_width < 0)
 		{
-			opt->flags &= ~MIN_WIDTH;
+			opt->flags &= ~(MIN_WIDTH | ZERO);
 			opt->flags |= DASH;
 			opt->min_width *= -1;
 		}

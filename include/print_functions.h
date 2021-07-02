@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 23:41:27 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/02 07:36:03 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/02 07:54:38 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int						ft_print_string(t_opt *opt, va_list args)
 int						ft_print_pointer(t_opt *opt, va_list args)
 						__attribute__((nonnull(1)));
 
+int						ft_print_int(t_opt *opt, va_list args)
+						__attribute__((nonnull(1)));
+
 int						ft_print_uint(t_opt *opt, va_list args)
 						__attribute__((nonnull(1)));
 
@@ -45,6 +48,8 @@ static t_printer const	g_printers[] = {
 	{'c', ft_print_char},
 	{'s', ft_print_string},
 	{'p', ft_print_pointer},
+	{'d', ft_print_int},
+	{'i', ft_print_int},
 	{'u', ft_print_uint},
 	{'x', ft_print_hex_low},
 	{'X', ft_print_hex_up},
