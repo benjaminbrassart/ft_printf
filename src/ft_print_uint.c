@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 07:24:42 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/02 07:28:26 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/02 07:56:18 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static void	ft_putuint(unsigned int n, int b)
 
 int	ft_print_uint(t_opt *opt, va_list args)
 {
-	int	bytes;
-	int	digits;
-	unsigned int n;
+	int				bytes;
+	int				digits;
+	unsigned int	n;
 
 	n = va_arg(args, unsigned int);
 	digits = ft_uint_size(n);
