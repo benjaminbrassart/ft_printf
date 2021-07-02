@@ -6,7 +6,7 @@
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/30 22:15:31 by bbrassar          #+#    #+#              #
-#    Updated: 2021/07/02 00:17:25 by bbrassar         ###   ########.fr        #
+#    Updated: 2021/07/02 04:21:11 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC						= $(addsuffix .c,									\
 							ft_parse_options								\
 							ft_get_printer									\
 							ft_print_char									\
+							ft_print_string									\
 						)
 
 DIR_OBJ					= obj
