@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 20:59:25 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/02 10:45:20 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/05 19:41:40 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ t_opt	*ft_parse_options(char const **p_format, va_list args)
 			opt->flags |= DASH;
 			opt->min_width *= -1;
 		}
+		if (opt->precision < 0)
+			opt->flags &= ~PRECISION;
 	}
 	return (opt);
 }
