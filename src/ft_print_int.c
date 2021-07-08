@@ -47,6 +47,23 @@ static void	ft_putint(int i, int b)
 	ft_putchar(BASE_HEX[n % 10]);
 }
 
+int	putsign(t_opt *opt, int n)
+{
+	int	bytes;
+
+	bytes = 0;
+	if (n < 0)
+		bytes += write(1, "-", 1);
+	else
+	{
+		if (opt->flags & PLUS)
+			bytes += write(1, "+", 1);
+		else if (opt->flags & SPACE)
+			bytes += write(1, " ", 1);
+	}
+	return (bytes);
+}
+
 int	ft_print_int(t_opt *opt, va_list args)
 {
 	int	n;
@@ -63,8 +80,7 @@ int	ft_print_int(t_opt *opt, va_list args)
 	while ((opt->flags & MIN_WIDTH) && !(opt->flags & ZERO)
 		&& opt->min_width > bytes + !!(n < 0))
 		bytes += write(1, " ", 1);
-	if (n < 0)
-		bytes += write(1, "-", 1);
+	bytes += putsign(opt, n);
 	while ((opt->flags & ZERO) && opt->min_width > bytes)
 		bytes += write(1, "0", 1);
 	if (!(opt->flags & PRECISION && opt->precision == 0 && n == 0))

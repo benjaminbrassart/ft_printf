@@ -22,6 +22,12 @@ static void	ft_parse_flags(char const **p_format, t_opt *opt)
 			opt->flags |= DASH;
 		else if (**p_format == '0')
 			opt->flags |= ZERO;
+		else if (**p_format == ' ')
+			opt->flags |= SPACE;
+		else if (**p_format == '+')
+			opt->flags |= PLUS;
+		else if (**p_format == '#')
+			opt->flags |= HASHTAG;
 		else
 			break ;
 		++(*p_format);
@@ -57,6 +63,22 @@ static void	ft_parse_precision(char const **p_format, va_list args, t_opt *opt)
 	}
 }
 
+static void	check_override(t_opt *opt)
+{
+	if (opt->flags & DASH)
+		opt->flags &= ~(MIN_WIDTH | ZERO);
+	if (opt->min_width < 0)
+	{
+		opt->flags &= ~(MIN_WIDTH | ZERO);
+		opt->flags |= DASH;
+		opt->min_width *= -1;
+	}
+	if (opt->precision < 0)
+		opt->flags &= ~PRECISION;
+	if (opt->flags & PLUS)
+		opt->flags &= ~SPACE;
+}
+
 t_opt	*ft_parse_options(char const **p_format, va_list args)
 {
 	t_opt	*opt;
@@ -70,16 +92,7 @@ t_opt	*ft_parse_options(char const **p_format, va_list args)
 		ft_parse_flags(p_format, opt);
 		ft_parse_min_width(p_format, args, opt);
 		ft_parse_precision(p_format, args, opt);
-		if (opt->flags & DASH)
-			opt->flags &= ~(MIN_WIDTH | ZERO);
-		if (opt->min_width < 0)
-		{
-			opt->flags &= ~(MIN_WIDTH | ZERO);
-			opt->flags |= DASH;
-			opt->min_width *= -1;
-		}
-		if (opt->precision < 0)
-			opt->flags &= ~PRECISION;
+		check_override(opt);
 	}
 	return (opt);
 }
