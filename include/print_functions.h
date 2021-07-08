@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 23:41:27 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/05 18:54:34 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/08 11:46:52 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_printer
 	int	chr;
 	int	(*fn)(t_opt *, va_list);
 }	t_printer;
+
+void					ft_putstr_fn(char const *s, int (*fn)(int));
 
 int						ft_print_char(t_opt *opt, va_list args)
 						__attribute__((nonnull(1)));

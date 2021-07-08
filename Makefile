@@ -6,7 +6,7 @@
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/30 22:15:31 by bbrassar          #+#    #+#              #
-#    Updated: 2021/07/05 18:54:44 by bbrassar         ###   ########.fr        #
+#    Updated: 2021/07/08 11:41:33 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC						= $(addsuffix .c,									\
 							ft_printf										\
 							ft_parse_options								\
 							ft_get_printer									\
+							ft_putstr_fn									\
 							ft_print_char									\
 							ft_print_string									\
 							ft_print_pointer								\
@@ -68,4 +69,6 @@ re:						fclean all
 run_test:				test/main.c all
 						$(CC) -g $< -o $@ -l ftprintf -L .
 
-.PHONY:					all clean fclean re
+bonus:					$(NAME)
+
+.PHONY:					all clean fclean re bonus

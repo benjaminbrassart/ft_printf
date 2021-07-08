@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 04:54:42 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/02 07:20:26 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/08 11:45:52 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	ft_puthex(unsigned int n, int b, int (*lf)(int))
 	ft_putchar(lf(BASE_HEX[n % 16]));
 }
 
-static int	ft_print_hex(t_opt *opt, unsigned int n, int (*lf)(int))
+int	ft_print_hex(t_opt *opt, unsigned int n, int (*lf)(int))
 {
 	int	bytes;
 	int	digits;
@@ -46,9 +46,11 @@ static int	ft_print_hex(t_opt *opt, unsigned int n, int (*lf)(int))
 		digits = opt->precision;
 	if (opt->flags & PRECISION)
 		opt->flags &= ~ZERO;
-	bytes = digits;
+	bytes = digits + ((opt->flags & HASHTAG) * 2);
 	if (opt->flags & PRECISION && opt->precision == 0 && n == 0)
 		bytes = 0;
+	if (opt->flags & HASHTAG)
+		ft_putstr_fn("0x", lf);
 	while ((opt->flags & ZERO) && opt->min_width > bytes)
 		bytes += write(1, "0", 1);
 	while ((opt->flags & MIN_WIDTH) && opt->min_width > bytes)
@@ -60,12 +62,12 @@ static int	ft_print_hex(t_opt *opt, unsigned int n, int (*lf)(int))
 	return (bytes);
 }
 
-int	ft_print_hex_low(t_opt *opt, va_list args)
-{
-	return (ft_print_hex(opt, va_arg(args, unsigned int), ft_tolower));
-}
-
 int	ft_print_hex_up(t_opt *opt, va_list args)
 {
 	return (ft_print_hex(opt, va_arg(args, unsigned int), ft_toupper));
+}
+
+int	ft_print_hex_low(t_opt *opt, va_list args)
+{
+	return (ft_print_hex(opt, va_arg(args, unsigned int), ft_tolower));
 }
