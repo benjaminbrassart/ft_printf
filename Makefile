@@ -6,7 +6,7 @@
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/30 22:15:31 by bbrassar          #+#    #+#              #
-#    Updated: 2021/07/08 11:41:33 by bbrassar         ###   ########.fr        #
+#    Updated: 2021/07/09 22:15:54 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,8 +66,8 @@ fclean:					libft-fclean clean
 
 re:						fclean all
 
-run_test:				test/main.c all
-						$(CC) -g $< -o $@ -l ftprintf -L .
+run_test:				test/main.c $(NAME)
+						$(CC) -g $< -o $@ -l ftprintf -L . -D FORMAT='"%+2d", 0'
 
 bonus:					$(NAME)
 

@@ -3,3 +3,4 @@ run_test
 run_test.dSYM/
 test/
 obj/
+.vscode

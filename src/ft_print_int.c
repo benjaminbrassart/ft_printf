@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 07:54:48 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/02 11:53:29 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/09 22:47:07 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 #include "options.h"
 #include "print_functions.h"
 
-static int	ft_intsize(int i)
+static int	ft_intsize(int i, t_opt *opt)
 {
 	int				sz;
 	unsigned int	n;
 
+	if (!(!(opt->flags & PRECISION) || opt->precision || i))
+		return (0);
 	sz = 1;
 	if (i < 0)
 		n = -i;
@@ -71,14 +73,14 @@ int	ft_print_int(t_opt *opt, va_list args)
 	int	digits;
 
 	n = va_arg(args, int);
-	digits = ft_intsize(n) * (!(opt->flags & PRECISION) || opt->precision || n);
+	digits = ft_intsize(n, opt);
 	if ((opt->flags & PRECISION) && digits < opt->precision)
 		digits = opt->precision;
 	if (opt->flags & PRECISION)
 		opt->flags &= ~ZERO;
 	bytes = digits;
 	while ((opt->flags & MIN_WIDTH) && !(opt->flags & ZERO)
-		&& opt->min_width > bytes + !!(n < 0))
+		&& opt->min_width > (bytes + !!(n < 0 || opt->flags & (PLUS | SPACE))))
 		bytes += write(1, " ", 1);
 	bytes += putsign(opt, n);
 	while ((opt->flags & ZERO) && opt->min_width > bytes)
