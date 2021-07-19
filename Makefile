@@ -6,7 +6,7 @@
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/19 21:55:51 by bbrassar          #+#    #+#              #
-#    Updated: 2021/07/19 22:31:39 by bbrassar         ###   ########.fr        #
+#    Updated: 2021/07/19 22:33:43 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ $(NAME_LIBFT):
 						$(MAKE) -C $(DIR_LIBFT)
 
 all:					$(NAME)
+
+bonus:					$(NAME)
 
 clean:
 						rm -rf $(DIR_OBJ)
