@@ -6,7 +6,7 @@
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/19 21:55:51 by bbrassar          #+#    #+#              #
-#    Updated: 2021/07/19 22:19:11 by bbrassar         ###   ########.fr        #
+#    Updated: 2021/07/19 22:31:39 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME_LIBFT				= $(DIR_LIBFT)/libft.a
 
 DIR_SRC					= src
 
-SRC						=	ft_get_printer.c ft_parse_options.c \
+SRC						=	ft_patoi.c ft_get_printer.c ft_parse_options.c \
 							ft_print_char.c ft_print_hex.c ft_print_int.c \
 							ft_print_pointer.c ft_print_raw.c \
 							ft_print_string.c ft_print_uint.c ft_printf.c \
