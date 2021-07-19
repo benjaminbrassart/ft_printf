@@ -5,32 +5,27 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/06/30 22:15:31 by bbrassar          #+#    #+#              #
-#    Updated: 2021/07/09 22:15:54 by bbrassar         ###   ########.fr        #
+#    Created: 2021/07/19 21:55:51 by bbrassar          #+#    #+#              #
+#    Updated: 2021/07/19 22:19:11 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS					= -Wall -Werror -Wextra -g
-
-BASE_DIR_LIBFT			= libft
-
 NAME					= libftprintf.a
+
+CFLAGS					= -Wall -Werror -Wextra -c -MMD \
+							-I$(DIR_INCLUDE) -I$(DIR_LIBFT)/include
+
+DIR_LIBFT				= libft/
+
+NAME_LIBFT				= $(DIR_LIBFT)/libft.a
 
 DIR_SRC					= src
 
-SRC						= $(addsuffix .c,									\
-							ft_printf										\
-							ft_parse_options								\
-							ft_get_printer									\
-							ft_putstr_fn									\
-							ft_print_char									\
-							ft_print_string									\
-							ft_print_pointer								\
-							ft_print_uint									\
-							ft_print_int									\
-							ft_print_hex									\
-							ft_print_raw									\
-						)
+SRC						=	ft_get_printer.c ft_parse_options.c \
+							ft_print_char.c ft_print_hex.c ft_print_int.c \
+							ft_print_pointer.c ft_print_raw.c \
+							ft_print_string.c ft_print_uint.c ft_printf.c \
+							ft_putstr_fn.c
 
 DIR_OBJ					= obj
 
@@ -38,37 +33,29 @@ OBJ						= $(addprefix $(DIR_OBJ)/, $(SRC:.c=.o))
 
 DIR_INCLUDE				= include
 
-INCLUDE					= $(addprefix $(DIR_INCLUDE)/, $(addsuffix .h,		\
-							ft_printf.h										\
-							ft_options.h									\
-							print_functions.h								\
-							libft.h											\
-						))
+DEPENDENCIES			= $(OBJ:.o=.d)
+
+$(NAME):				$(NAME_LIBFT) $(OBJ)
+						cp -f $< $@
+						ar vrs $@ $(filter %.o, $^)
+
+-include $(DEPENDENCIES)
+
+$(DIR_OBJ)/%.o:			$(DIR_SRC)/%.c
+						@mkdir -p $(dir $@)
+						$(CC) $(CFLAGS) $< -o $@
+
+$(NAME_LIBFT):
+						$(MAKE) -C $(DIR_LIBFT)
 
 all:					$(NAME)
 
--include $(BASE_DIR_LIBFT)/Makefile
-
-$(DIR_OBJ):
-						mkdir -p $@
-
-$(DIR_OBJ)/%.o:			$(DIR_SRC)/%.c |$(DIR_OBJ)
-						$(CC) $(CFLAGS) $< -o $@ -c -I $(DIR_INCLUDE)
-
-$(NAME):				$(OBJ) $(OBJ_LIBFT)
-						ar rcs $@ $^
-
-clean:					libft-clean
+clean:
 						rm -rf $(DIR_OBJ)
 
-fclean:					libft-fclean clean
+fclean:					clean
 						rm -f $(NAME)
 
 re:						fclean all
 
-run_test:				test/main.c $(NAME)
-						$(CC) -g $< -o $@ -l ftprintf -L . -D FORMAT='"%+2d", 0'
-
-bonus:					$(NAME)
-
-.PHONY:					all clean fclean re bonus
+.PHONY:					all clean fclean re
