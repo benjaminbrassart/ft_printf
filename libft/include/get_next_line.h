@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 05:23:34 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/01 05:41:54 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/09 23:32:54 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@
 typedef struct s_gnl_fd_list
 {
 	int						fd;
-	char					rest[BUFFER_SIZE + 1];
+	char					*rest;
 	struct s_gnl_fd_list	*next;
 }	t_gnl_fd_list;
 
-int	get_next_line(int fd, char **line)
-	__attribute__((nonnull(2)));
+int	get_next_line(int fd, char **line);
 
 #endif

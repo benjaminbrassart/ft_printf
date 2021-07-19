@@ -5,157 +5,70 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/06/30 22:40:36 by bbrassar          #+#    #+#              #
-#    Updated: 2021/07/02 01:32:53 by bbrassar         ###   ########.fr        #
+#    Created: 2021/07/14 02:36:44 by bbrassar          #+#    #+#              #
+#    Updated: 2021/07/14 03:59:18 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ifndef BASE_DIR_LIBFT
-STANDALONE					:= 1
-endif
+NAME				= libft.a
 
-ifndef CFLAGS
-CFLAGS						= -Wall -Werror -Wextra
-endif
+NAME_SO				= libft.so
 
-BASENAME_LIBFT				:= libft.a
+CFLAGS				= -Wall -Werror -Wextra -I$(DIR_INCLUDE) -c -MMD
 
-BASENAME_SO_LIBFT			:= libft.so
+LDFLAGS				= -fPIC -shared
 
-BASEDIR_SRC_LIBFT			:= src
+DIR_SRC				= src
 
-BASEDIR_OBJ_LIBFT			:= obj
+SRC					=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c \
+						ft_memmove.c ft_memchr.c ft_memrchr.c ft_rawmemchr.c \
+						ft_memcmp.c ft_strlen.c ft_isalnum.c ft_isalpha.c \
+						ft_isascii.c ft_iscntrl.c ft_isdigit.c ft_isgraph.c \
+						ft_islower.c ft_isprint.c ft_ispunct.c ft_isspace.c \
+						ft_isupper.c ft_isxdigit.c ft_toupper.c ft_tolower.c \
+						ft_strchr.c ft_strrchr.c ft_strcspn.c ft_strnlen.c \
+						ft_strncmp.c ft_strncpy.c ft_strncat.c ft_strndup.c \
+						ft_strlcpy.c ft_strlcat.c ft_strnstr.c ft_atoi.c \
+						ft_strcat.c ft_strcpy.c ft_strcmp.c ft_strstr.c \
+						ft_atoll.c ft_calloc.c ft_strdup.c ft_substr.c \
+						ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
+						ft_lltoa.c ft_strmapi.c ft_putchar.c ft_putchar_fd.c \
+						ft_putstr.c ft_putstr_fd.c ft_putendl.c \
+						ft_putendl_fd.c ft_putnbr.c ft_putnbr_fd.c ft_lstnew.c \
+						ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+						ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
+						ft_lstiter.c ft_lstmap.c ft_strrepeat.c get_next_line.c
 
-BASEDIR_INCLUDE_LIBFT		:= include
+DIR_OBJ				= obj
 
-ifdef STANDALONE
-NAME_LIBFT					:= $(BASENAME_LIBFT)
+OBJ					= $(addprefix $(DIR_OBJ)/, $(SRC:.c=.o))
 
-NAME_SO_LIBFT				:= $(BASENAME_SO_LIBFT)
+DIR_INCLUDE			= include
 
-DIR_SRC_LIBFT				:= $(BASEDIR_SRC_LIBFT)
+DEPENDENCIES		= $(OBJ:.o=.d)
 
-DIR_OBJ_LIBFT				:= $(BASEDIR_OBJ_LIBFT)
+$(NAME):			$(OBJ)
+					ar rcs $@ $^
 
-DIR_INCLUDE_LIBFT			:= $(BASEDIR_INCLUDE_LIBFT)
-else
-RULE_PREFIX					:= libft-
+-include $(DEPENDENCIES)
 
-NAME_LIBFT					:= $(BASE_DIR_LIBFT)/$(BASENAME_LIBFT)
+$(DIR_OBJ):
+					mkdir -p $@
 
-NAME_SO_LIBFT				:= $(BASE_DIR_LIBFT)/$(BASENAME_SO_LIBFT)
+$(DIR_OBJ)/%.o:		$(DIR_SRC)/%.c |$(DIR_OBJ)
+					$(CC) $(CFLAGS) $< -o $@
 
-DIR_SRC_LIBFT				:= $(BASE_DIR_LIBFT)/$(BASEDIR_SRC_LIBFT)
+$(NAME_SO):			$(OBJ)
+					$(CC) $^ -o $@ $(LDFLAGS)
 
-DIR_OBJ_LIBFT				:= $(BASE_DIR_LIBFT)/$(BASEDIR_OBJ_LIBFT)
+all:				$(NAME) $(NAME_SO)
 
-DIR_INCLUDE_LIBFT			:= $(BASE_DIR_LIBFT)/$(BASEDIR_INCLUDE_LIBFT)
-endif
+clean:
+					rm -rf $(DIR_OBJ)
 
-SRC_LIBFT					= $(addprefix ft_, $(addsuffix .c,	\
-								memset							\
-								bzero							\
-								memcpy							\
-								memccpy							\
-								memmove							\
-								memchr							\
-								memrchr							\
-								rawmemchr						\
-								memcmp							\
-								strlen							\
-								isalnum							\
-								isalpha							\
-								isascii							\
-								iscntrl							\
-								isdigit							\
-								isgraph							\
-								islower							\
-								isprint							\
-								ispunct							\
-								isspace							\
-								isupper							\
-								isxdigit						\
-								toupper							\
-								tolower							\
-								strchr							\
-								strcmp							\
-								strcpy							\
-								strcat							\
-								strstr							\
-								strrchr							\
-								strcspn							\
-								strnlen							\
-								strncmp							\
-								strncpy							\
-								strncat							\
-								strndup							\
-								strlcpy							\
-								strlcat							\
-								strnstr							\
-								atoi							\
-								atoll							\
-								patoi							\
-								calloc							\
-								strdup							\
-								substr							\
-								strjoin							\
-								strtrim							\
-								split							\
-								itoa							\
-								lltoa							\
-								strmapi							\
-								putchar							\
-								putchar_fd						\
-								putstr							\
-								putstr_fd						\
-								putendl							\
-								putendl_fd						\
-								putnbr							\
-								putnbr_fd						\
-								lstnew							\
-								lstadd_front					\
-								lstsize							\
-								lstlast							\
-								lstadd_back						\
-								lstdelone						\
-								lstclear						\
-								lstiter							\
-								lstmap							\
-								strrepeat						\
-							)) get_next_line.c
+fclean:				clean
+					rm -f $(NAME) $(NAME_SO)
 
-OBJ_LIBFT					= $(addprefix $(DIR_OBJ_LIBFT)/, $(SRC_LIBFT:.c=.o))
+re:					fclean all
 
-$(RULE_PREFIX)all:			$(NAME_LIBFT) $(NAME_SO_LIBFT)
-
-$(DIR_OBJ_LIBFT):
-							mkdir -p $@
-
-$(DIR_OBJ_LIBFT)/%.o:		$(DIR_SRC_LIBFT)/%.c |$(DIR_OBJ_LIBFT)
-							$(CC) $(CFLAGS) -c $< -o $@ -I $(DIR_INCLUDE_LIBFT)
-
-$(NAME_LIBFT):				$(OBJ_LIBFT)
-							ar rcs $@ $^
-
-$(NAME_SO_LIBFT):			$(OBJ_LIBFT)
-							$(CC) $(CFLAGS) -fPIC -shared $^ -o $@
-
-$(RULE_PREFIX)clean:
-							rm -rf $(DIR_OBJ_LIBFT)
-
-$(RULE_PREFIX)fclean:		$(RULE_PREFIX)clean
-							rm -f $(NAME_LIBFT) $(NAME_SO_LIBFT)
-
-$(RULE_PREFIX)re:			$(addprefix $(RULE_PREFIX), fclean all)
-
-debug:
-							@echo "$(STANDALONE)"
-							@echo "NAME_LIBFT: $(NAME_LIBFT)"
-							@echo "NAME_SO_LIBFT: $(NAME_SO_LIBFT)"
-							@echo "DIR_SRC_LIBFT: $(DIR_SRC_LIBFT)"
-							@echo "DIR_OBJ_LIBFT: $(DIR_OBJ_LIBFT)"
-							@echo "DIR_INCLUDE_LIBFT: $(DIR_INCLUDE_LIBFT)"
-							@echo "RULE_PREFIX: $(RULE_PREFIX)"
-							@echo "OBJ_LIBFT: $(OBJ_LIBFT)"
-
-.PHONY:						$(addprefix $(RULE_PREFIX), all clean fclean re)
+.PHONY:				all clean fclean re
