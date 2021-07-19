@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 04:54:42 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/08 11:45:52 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/07/19 22:45:06 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int	ft_print_hex(t_opt *opt, unsigned int n, int (*lf)(int))
 		digits = opt->precision;
 	if (opt->flags & PRECISION)
 		opt->flags &= ~ZERO;
-	bytes = digits + ((opt->flags & HASHTAG) * 2);
+	bytes = digits + (((opt->flags & HASHTAG) && n != 0) * 2);
 	if (opt->flags & PRECISION && opt->precision == 0 && n == 0)
 		bytes = 0;
-	if (opt->flags & HASHTAG)
+	if ((opt->flags & HASHTAG) && n != 0)
 		ft_putstr_fn("0x", lf);
 	while ((opt->flags & ZERO) && opt->min_width > bytes)
 		bytes += write(1, "0", 1);

@@ -6,16 +6,16 @@
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/19 21:55:51 by bbrassar          #+#    #+#              #
-#    Updated: 2021/07/19 22:33:43 by bbrassar         ###   ########.fr        #
+#    Updated: 2021/07/19 22:40:22 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME					= libftprintf.a
 
-CFLAGS					= -Wall -Werror -Wextra -c -MMD \
+CFLAGS					= -Wall -Werror -Wextra -c -g -MMD \
 							-I$(DIR_INCLUDE) -I$(DIR_LIBFT)/include
 
-DIR_LIBFT				= libft/
+DIR_LIBFT				= libft
 
 NAME_LIBFT				= $(DIR_LIBFT)/libft.a
 
@@ -47,6 +47,9 @@ $(DIR_OBJ)/%.o:			$(DIR_SRC)/%.c
 
 $(NAME_LIBFT):
 						$(MAKE) -C $(DIR_LIBFT)
+
+run_test:				$(NAME)
+						$(CC) -g test/main.c -o $@ -lftprintf -L.
 
 all:					$(NAME)
 
