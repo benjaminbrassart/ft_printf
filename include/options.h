@@ -6,7 +6,7 @@
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 20:46:12 by bbrassar          #+#    #+#             */
-/*   Updated: 2021/07/02 05:02:44 by bbrassar         ###   ########.fr       */
+/*   Updated: 2021/09/29 03:31:37 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include <stdarg.h>
 # include <stdint.h>
 
-# define MIN_WIDTH __MIN_WIDTH	// 1
-# define PRECISION __PRECISION	// 2
-# define DASH __DASH			// 4
-# define ZERO __ZERO			// 8
-# define SPACE __SPACE			// 16
-# define PLUS __PLUS			// 32
-# define HASHTAG __HASHTAG		// 64
+# define MIN_WIDTH __MIN_WIDTH
+# define PRECISION __PRECISION
+# define DASH __DASH
+# define ZERO __ZERO
+# define SPACE __SPACE
+# define PLUS __PLUS
+# define HASHTAG __HASHTAG
 # define BASE_HEX ("0123456789abcdef")
 
 enum e_opt
